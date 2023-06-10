@@ -1,5 +1,5 @@
 import streamlit as st 
-import pandas as pd, zipfile, numpy as np, matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
  
 st.title('Summary Harbolnas 2017\n\n')
 
