@@ -13,11 +13,6 @@ productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStr
 # Data Wrangling - Cleaning Data
 productsData.dropna(axis=0, inplace=True)
 
-# EDA - Mengubah timestamp menjadi format tanggal pada kolom shipping_limit_date
-orderItemsData['shipping_limit_date'] = pd.to_datetime(orderItemsData['shipping_limit_date'])
-orderItemsData['shipping_limit_date'] = orderItemsData['shipping_limit_date'].dt.normalize()
-orderItemsData['shipping_limit_date'] = orderItemsData['shipping_limit_date'].dt.floor('D')
-
 # EDA - Merger dataset orderItemsData dan orderPaymentsData
 orders_items_payments_data = pd.merge(
     left=orderItemsData,
