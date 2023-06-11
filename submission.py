@@ -6,10 +6,10 @@ import numpy as np
 st.title('Summary Harbolnas 2017\n\n')
 
 # Data Wrangling - Gathering Data
-orderItemsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/orderItemsData.csv", delimiter=",", on_bad_lines = False)
-orderPaymentsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_payments_dataset.csv", delimiter=",", on_bad_lines = False)
-productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/products_dataset.csv", delimiter=",", on_bad_lines = False)
-newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/newdf.csv", delimiter=",", on_bad_lines = False)
+orderItemsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/orderItemsData.csv", delimiter=",", on_bad_lines = "skip")
+orderPaymentsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_payments_dataset.csv", delimiter=",", on_bad_lines = "skip")
+productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/products_dataset.csv", delimiter=",", on_bad_lines = "skip")
+newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/newdf.csv", delimiter=",", on_bad_lines = "skip")
 
 # Data Wrangling - Cleaning Data
 productsData.dropna(axis=0, inplace=True)
