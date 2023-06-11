@@ -9,21 +9,10 @@ st.title('Summary Harbolnas 2017\n\n')
 orderItemsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/orderItemsData.csv", delimiter=",", error_bad_lines = False)
 orderPaymentsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_payments_dataset.csv", delimiter=",", error_bad_lines = False)
 productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/products_dataset.csv", delimiter=",", error_bad_lines = False)
+newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/newdf.csv", delimiter=",", error_bad_lines = False)
 
 # Data Wrangling - Cleaning Data
 productsData.dropna(axis=0, inplace=True)
-
-# EDA - Merger dataset orderItemsData dan orderPaymentsData
-orders_items_payments_data = pd.merge(
-    left=orderItemsData,
-    right=orderPaymentsData,
-    how="outer",
-    left_on="order_id",
-    right_on="order_id"
-)
-
-# EDA - Filter Data
-newdf = orders_items_payments_data[(orders_items_payments_data.shipping_limit_date == "2017-12-12")]
 
 # EDA - Question 1
 firstTopProductCount = newdf[(newdf.product_id == "5094d0cb28a3e400d90c21c6df262856")].count()
