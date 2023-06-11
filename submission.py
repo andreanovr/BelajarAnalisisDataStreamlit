@@ -15,7 +15,7 @@ newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/
 productsData.dropna(axis=0, inplace=True)
 
 # EDA - Question 1
-firstTopProductCountFix = (newdf["product_id"] == "5094d0cb28a3e400d90c21c6df262856").sum()
+firstTopProductCountFix = (newdf[newdf.product_id] == "5094d0cb28a3e400d90c21c6df262856").sum()
 secondTopProductFix = (newdf["product_id"] == "f71f42e2381752836563b70beb542f80").sum()
 thirdTopProductFix = (newdf["product_id"] == "f71f42e2381752836563b70beb542f80").sum()
 otherProduct = newdf.groupby(['product_id']).value_counts()
