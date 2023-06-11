@@ -6,9 +6,9 @@ import numpy as np
 st.title('Summary Harbolnas 2017\n\n')
 
 # Data Wrangling - Gathering Data
-orderItemsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_items_dataset.csv", delimiter=",")
-orderPaymentsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_payments_dataset.csv", delimiter=",")
-productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/products_dataset.csv", delimiter=",")
+orderItemsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_items_dataset.csv", delimiter=",", on_bad_lines='skip')
+orderPaymentsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_payments_dataset.csv", delimiter=",", on_bad_lines='skip')
+productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/products_dataset.csv", delimiter=",", on_bad_lines='skip')
 
 # Data Wrangling - Cleaning Data
 productsData.dropna(axis=0, inplace=True)
