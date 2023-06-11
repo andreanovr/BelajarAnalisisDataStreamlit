@@ -15,7 +15,7 @@ newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/
 productsData.dropna(axis=0, inplace=True)
 
 # EDA - Question 1
-firstTopProductCount = newdf[(newdf.product_id == "5094d0cb28a3e400d90c21c6df262856")].value_counts(newdf.values.flatten())
+firstTopProductCount = newdf[(newdf["product_id"] == "5094d0cb28a3e400d90c21c6df262856")].value_counts(newdf.values.flatten())
 firstTopProductCountFix = firstTopProductCount["order_item_id"]
 secondTopProduct = newdf[(newdf.product_id == "f71f42e2381752836563b70beb542f80")].value_counts(newdf.values.flatten())
 secondTopProductFix = secondTopProduct["order_item_id"]
