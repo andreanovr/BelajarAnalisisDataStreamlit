@@ -15,13 +15,13 @@ newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/
 productsData.dropna(axis=0, inplace=True)
 
 # EDA - Question 1
-firstTopProductCount = newdf[(newdf.product_id == "5094d0cb28a3e400d90c21c6df262856")].count()
+firstTopProductCount = newdf[(newdf.product_id == "5094d0cb28a3e400d90c21c6df262856")].value_counts()
 firstTopProductCountFix = firstTopProductCount["order_item_id"]
-secondTopProduct = newdf[(newdf.product_id == "f71f42e2381752836563b70beb542f80")].count()
+secondTopProduct = newdf[(newdf.product_id == "f71f42e2381752836563b70beb542f80")].value_counts()
 secondTopProductFix = secondTopProduct["order_item_id"]
-thirdTopProduct = newdf[(newdf.product_id == "28bdd20184e553872bab0ae75bbcaecf")].count()
+thirdTopProduct = newdf[(newdf.product_id == "28bdd20184e553872bab0ae75bbcaecf")].value_counts()
 thirdTopProductFix = thirdTopProduct["order_item_id"]
-otherProduct = newdf.groupby(['product_id']).count()
+otherProduct = newdf.groupby(['product_id']).value_counts()
 otherProductsTotal = otherProduct["order_item_id"].sum()
 otherProductExcludeTop3 = otherProductsTotal - (firstTopProductCountFix+secondTopProductFix+thirdTopProductFix)
 firstTopProduct = productsData[(productsData.product_id == "5094d0cb28a3e400d90c21c6df262856")].product_category_name.values[0]
@@ -29,13 +29,13 @@ secondTopProduct = productsData[(productsData.product_id == "f71f42e238175283656
 thirdTopProduct = productsData[(productsData.product_id == "28bdd20184e553872bab0ae75bbcaecf")].product_category_name.values[0]
 
 # EDA - Question 2
-boletoCount = newdf[newdf.payment_type=="boleto"].count()
+boletoCount = newdf[newdf.payment_type=="boleto"].value_counts()
 boletoCountFix = boletoCount["order_item_id"]
-creditCardCount = newdf[newdf.payment_type=="credit_card"].count()
+creditCardCount = newdf[newdf.payment_type=="credit_card"].value_counts()
 creditCardCountFix = creditCardCount["order_item_id"]
-debitCardCount = newdf[newdf.payment_type=="debit_card"].count()
+debitCardCount = newdf[newdf.payment_type=="debit_card"].value_counts()
 debitCardCountFix = debitCardCount["order_item_id"]
-voucherCount = newdf[newdf.payment_type=="voucher"].count()
+voucherCount = newdf[newdf.payment_type=="voucher"].value_counts()
 voucherCountFix = voucherCount["order_item_id"]
 
 # Visualization Question 1
