@@ -15,18 +15,15 @@ newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/
 productsData.dropna(axis=0, inplace=True)
 
 # EDA - Question 1
-firstTopProductCount = newdf["product_id"== "5094d0cb28a3e400d90c21c6df262856"].count()
-firstTopProductCountFix = firstTopProductCount["order_item_id"]
-secondTopProduct = newdf[(newdf.product_id == "f71f42e2381752836563b70beb542f80")].value_counts(newdf.values.flatten())
-secondTopProductFix = secondTopProduct["order_item_id"]
-thirdTopProduct = newdf[(newdf.product_id == "28bdd20184e553872bab0ae75bbcaecf")].value_counts(newdf.values.flatten())
-thirdTopProductFix = thirdTopProduct["order_item_id"]
+firstTopProductCountFix = (newdf["product_id"] == "5094d0cb28a3e400d90c21c6df262856").sum()
+secondTopProductFix = (newdf["product_id"] == "f71f42e2381752836563b70beb542f80").sum()
+thirdTopProductFix = (newdf["product_id"] == "f71f42e2381752836563b70beb542f80").sum()
 otherProduct = newdf.groupby(['product_id']).value_counts()
 otherProductsTotal = otherProduct["order_item_id"].sum()
 otherProductExcludeTop3 = otherProductsTotal - (firstTopProductCountFix+secondTopProductFix+thirdTopProductFix)
 firstTopProduct = productsData[(productsData.product_id == "5094d0cb28a3e400d90c21c6df262856")].product_category_name.values[0]
 secondTopProduct = productsData[(productsData.product_id == "f71f42e2381752836563b70beb542f80")].product_category_name.values[0]
-thirdTopProduct = productsData[(productsData.product_id == "28bdd20184e553872bab0ae75bbcaecf")].product_category_name.values[0]
+thirdTopProduct = productsData[(productsData.product_id == "f71f42e2381752836563b70beb542f80")].product_category_name.values[0]
 
 # EDA - Question 2
 boletoCount = newdf[newdf.payment_type=="boleto"].value_counts(newdf.values.flatten())
