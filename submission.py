@@ -6,19 +6,39 @@ import numpy as np
 st.title('Summary Harbolnas 2017\n\n')
 
 # Data Wrangling - Gathering Data
-orderItemsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/orderItemsData.csv", delimiter=",", on_bad_lines = "skip")
-orderPaymentsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/order_payments_dataset.csv", delimiter=",", on_bad_lines = "skip")
-productsData = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/products_dataset.csv", delimiter=",", on_bad_lines = "skip")
-newdf = pd.read_csv("https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/data/newdf.csv", delimiter=",", on_bad_lines = "skip")
+# orderItemsData = pd.read_csv(r"C:\Users\User\Downloads\Submission\data\order_items_dataset.csv", delimiter=",")
+# orderPaymentsData = pd.read_csv(r"C:\Users\User\Downloads\Submission\data\order_payments_dataset.csv", delimiter=",")
+# productsData = pd.read_csv(r"C:\Users\User\Downloads\Submission\data\products_dataset.csv", delimiter=",")
+
+orderItemsData = pd.read_csv("https://raw.githubusercontent.com/andreanovr/BelajarAnalisisDataStreamlit/main/data/order_items_dataset.csv", delimiter=",")
+orderPaymentsData = pd.read_csv("https://raw.githubusercontent.com/andreanovr/BelajarAnalisisDataStreamlit/main/data/order_payments_dataset.csv", delimiter=",")
+productsData = pd.read_csv("https://raw.githubusercontent.com/andreanovr/BelajarAnalisisDataStreamlit/main/data/products_dataset.csv", delimiter=",")
 
 # Data Wrangling - Cleaning Data
 productsData.dropna(axis=0, inplace=True)
+
+# EDA - Mengubah timestamp menjadi format tanggal pada kolom shipping_limit_date
+orderItemsData['shipping_limit_date'] = pd.to_datetime(orderItemsData['shipping_limit_date'])
+orderItemsData['shipping_limit_date'] = orderItemsData['shipping_limit_date'].dt.normalize()
+orderItemsData['shipping_limit_date'] = orderItemsData['shipping_limit_date'].dt.floor('D')
+
+# EDA - Merger dataset orderItemsData dan orderPaymentsData
+orders_items_payments_data = pd.merge(
+    left=orderItemsData,
+    right=orderPaymentsData,
+    how="outer",
+    left_on="order_id",
+    right_on="order_id"
+)
+
+# EDA - Filter Data
+newdf = orders_items_payments_data[(orders_items_payments_data.shipping_limit_date == "2017-12-12")]
 
 # EDA - Question 1
 firstTopProductCountFix = (newdf["product_id"] == "5094d0cb28a3e400d90c21c6df262856").sum()
 secondTopProductFix = (newdf["product_id"] == "f71f42e2381752836563b70beb542f80").sum()
 thirdTopProductFix = (newdf["product_id"] == "f71f42e2381752836563b70beb542f80").sum()
-otherProduct = newdf.groupby(['product_id']).value_counts()
+otherProduct = newdf.groupby(['product_id']).count()
 otherProductsTotal = otherProduct["order_item_id"].sum()
 otherProductExcludeTop3 = otherProductsTotal - (firstTopProductCountFix+secondTopProductFix+thirdTopProductFix)
 firstTopProduct = productsData[(productsData.product_id == "5094d0cb28a3e400d90c21c6df262856")].product_category_name.values[0]
@@ -26,13 +46,13 @@ secondTopProduct = productsData[(productsData.product_id == "f71f42e238175283656
 thirdTopProduct = productsData[(productsData.product_id == "f71f42e2381752836563b70beb542f80")].product_category_name.values[0]
 
 # EDA - Question 2
-boletoCount = newdf[newdf.payment_type=="boleto"].value_counts(newdf.values.flatten())
+boletoCount = newdf[newdf.payment_type=="boleto"].count()
 boletoCountFix = boletoCount["order_item_id"]
-creditCardCount = newdf[newdf.payment_type=="credit_card"].value_counts(newdf.values.flatten())
+creditCardCount = newdf[newdf.payment_type=="credit_card"].count()
 creditCardCountFix = creditCardCount["order_item_id"]
-debitCardCount = newdf[newdf.payment_type=="debit_card"].value_counts(newdf.values.flatten())
+debitCardCount = newdf[newdf.payment_type=="debit_card"].count()
 debitCardCountFix = debitCardCount["order_item_id"]
-voucherCount = newdf[newdf.payment_type=="voucher"].value_counts(newdf.values.flatten())
+voucherCount = newdf[newdf.payment_type=="voucher"].count()
 voucherCountFix = voucherCount["order_item_id"]
 
 # Visualization Question 1
