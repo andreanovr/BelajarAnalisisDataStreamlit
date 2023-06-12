@@ -4,4 +4,4 @@
 
 # Online Dashboard
 https://andreanovr-belajaranalisisdatastreamlit-submission-yagqoc.streamlit.app/
-![Capture.PNG]( {[linkgambar](https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/Capture.PNG)} )
+![Capture.PNG](https://github.com/andreanovr/BelajarAnalisisDataStreamlit/blob/main/Capture.PNG)
